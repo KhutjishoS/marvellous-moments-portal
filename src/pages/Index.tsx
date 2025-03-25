@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import FeaturedVendors from '../components/FeaturedVendors';
@@ -37,12 +38,12 @@ const Index = () => {
               Let us transform your wedding dreams into unforgettable memories with our exclusive collection of services
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="px-8 py-3 bg-white text-wedding-gold font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <Link to="/venues" className="px-8 py-3 bg-white text-wedding-gold font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 Find Your Vendors
-              </button>
-              <button className="px-8 py-3 border-2 border-white text-white font-medium rounded-full hover:bg-white/10 transition-all duration-300">
-                Create Wedding Timeline
-              </button>
+              </Link>
+              <Link to="/contact" className="px-8 py-3 border-2 border-white text-white font-medium rounded-full hover:bg-white/10 transition-all duration-300">
+                Contact Us Today
+              </Link>
             </div>
           </div>
         </section>

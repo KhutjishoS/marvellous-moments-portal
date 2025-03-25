@@ -29,7 +29,7 @@ const ServiceCategories: React.FC = () => {
       name: "Photography",
       icon: "📸",
       description: "Capture timeless moments with expert photographers",
-      path: "/photography",
+      path: "/photographers",
       color: "bg-gradient-to-br from-wedding-rose/10 to-wedding-rose/20"
     },
     {
@@ -45,7 +45,7 @@ const ServiceCategories: React.FC = () => {
       name: "Flowers",
       icon: "💐",
       description: "Elegant floral designs to enhance your celebration",
-      path: "/flowers",
+      path: "/florists",
       color: "bg-gradient-to-br from-[#E8F4EA] to-[#C9E4D6]"
     },
     {
