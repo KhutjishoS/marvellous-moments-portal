@@ -20,16 +20,25 @@ const ShoppingCart: React.FC = () => {
   const handleCheckout = () => {
     toast({
       title: "Order placed successfully!",
-      description: "Thank you for your order. We'll be in touch soon.",
+      description: "Thank you for your order. We'll be in touch soon to finalize your wedding services.",
     });
     clearCart();
     toggleCart();
   };
 
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-ZA', {
+      style: 'currency',
+      currency: 'ZAR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity, 
     0
-  ).toFixed(2);
+  );
 
   if (!isCartOpen) return null;
 
@@ -39,7 +48,7 @@ const ShoppingCart: React.FC = () => {
         <CardHeader className="flex flex-row items-center justify-between p-4 bg-wedding-cream">
           <div className="flex items-center space-x-2">
             <ShoppingBag className="h-5 w-5 text-wedding-gold" />
-            <h3 className="font-serif text-xl">Your Cart ({cartCount})</h3>
+            <h3 className="font-serif text-xl">Your Wedding Collection ({cartCount})</h3>
           </div>
           <Button 
             variant="ghost" 
@@ -55,11 +64,12 @@ const ShoppingCart: React.FC = () => {
           {cartItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-40 text-center">
               <ShoppingBag className="h-12 w-12 text-wedding-gold/30 mb-4" />
-              <p className="text-wedding-charcoal/70">Your cart is empty</p>
+              <p className="text-wedding-charcoal/70">Your collection is empty</p>
+              <p className="text-wedding-charcoal/60 text-sm mt-1 mb-4">Add wedding services to create your perfect day</p>
               <Button 
                 variant="outline" 
                 onClick={toggleCart} 
-                className="mt-4 border-wedding-gold/30 text-wedding-gold hover:bg-wedding-gold/10"
+                className="mt-2 border-wedding-gold/30 text-wedding-gold hover:bg-wedding-gold/10"
               >
                 Continue Shopping
               </Button>
@@ -71,7 +81,7 @@ const ShoppingCart: React.FC = () => {
                   <div className="flex justify-between">
                     <div>
                       <h4 className="font-medium">{item.name}</h4>
-                      <p className="text-wedding-gold">R{item.price.toFixed(2)} per person</p>
+                      <p className="text-wedding-gold">{formatPrice(item.price)}</p>
                     </div>
                     <Button 
                       variant="ghost" 
@@ -89,6 +99,7 @@ const ShoppingCart: React.FC = () => {
                         size="icon" 
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         className="h-8 w-8 rounded-full hover:bg-wedding-gold/10"
+                        disabled={item.quantity <= 1}
                       >
                         <Minus className="h-3 w-3" />
                       </Button>
@@ -102,7 +113,7 @@ const ShoppingCart: React.FC = () => {
                         <Plus className="h-3 w-3" />
                       </Button>
                     </div>
-                    <p className="font-medium">R{(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="font-medium">{formatPrice(item.price * item.quantity)}</p>
                   </div>
                 </li>
               ))}
@@ -114,7 +125,7 @@ const ShoppingCart: React.FC = () => {
           <CardFooter className="border-t border-wedding-gold/10 p-4 flex flex-col">
             <div className="flex justify-between w-full mb-4">
               <span className="font-medium">Total:</span>
-              <span className="font-serif text-lg text-wedding-gold">R{totalPrice}</span>
+              <span className="font-serif text-lg text-wedding-gold">{formatPrice(totalPrice)}</span>
             </div>
             <div className="flex gap-2 w-full">
               <Button 
@@ -122,7 +133,7 @@ const ShoppingCart: React.FC = () => {
                 onClick={clearCart} 
                 className="flex-1 border-wedding-gold/30 text-wedding-charcoal hover:bg-wedding-gold/10"
               >
-                Clear Cart
+                Clear All
               </Button>
               <Button 
                 onClick={handleCheckout} 

@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 // Define types for our cart items and context
 export type CartItem = {
@@ -25,8 +25,18 @@ const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(u
 
 // Create a provider component
 export const ShoppingCartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    // Initialize from localStorage if available
+    const savedCart = localStorage.getItem('weddingCart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('weddingCart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 

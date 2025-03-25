@@ -1,8 +1,6 @@
-
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ShoppingCart from '../components/ShoppingCart';
 import { useShoppingCart } from '../contexts/ShoppingCartContext';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
@@ -77,7 +75,6 @@ const Catering = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <ShoppingCart />
       <main className="flex-grow pt-24">
         <section className="section bg-wedding-ivory">
           <div className="container-custom">

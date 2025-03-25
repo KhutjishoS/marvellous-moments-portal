@@ -12,6 +12,7 @@ import Catering from "./pages/Catering";
 import Florists from "./pages/Florists";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import ShoppingCart from "./components/ShoppingCart";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <ShoppingCartProvider>
         <Toaster />
         <Sonner />
+        <ShoppingCart />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
